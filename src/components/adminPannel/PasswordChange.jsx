@@ -16,7 +16,7 @@ function PasswordChange() {
   };
 
   return (
-    <div className=" w-full lg:pr-32 mt-10 flex flex-col justify-start items-center">
+    <div className=" lg:pr-32 mt-10 lg:w-2/3  ">
       {/* Title */}
       <h1 className="text-sub-heading font-customBold text-gray-900 mb-2">Password</h1>
       <p className="text-smallHead xlx:text-sm text-customeGray2 mb-6 font-customBold">

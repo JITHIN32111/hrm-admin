@@ -21,7 +21,7 @@ const AdminAside = ({ open, setOpen }) => {
 
   const Menus = [
     { title: "Overview", path: "/admin", icon: <MdSpaceDashboard /> },
-    { title: "Employees", path: "/admin/users", icon: <RiShieldUserFill /> },
+    { title: "Employees", path: "/admin/employees", icon: <RiShieldUserFill /> },
     { title: "Timesheet", path: "/admin/packages", icon: <PiBagFill /> },
     { title: "Departments", path: "/admin/department", icon: <BiSolidCoupon /> },
     { title: "Designation", path: "/admin/designation", icon: <BiSolidCoupon /> },

@@ -24,7 +24,7 @@ function App() {
           {/* Routes that require sidebar and header */}
           <Route path="/admin" element={<MainLayout />}>
             <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/employees" element={<Users />} />
             <Route path="/admin/packages" element={<Packages />} />
             <Route path="/admin/add-package" element={<AddPackage />} />
             <Route path="/admin/department" element={<Department />} />

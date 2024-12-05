@@ -3,6 +3,7 @@ import AccountSettings from "./AccountSettings";
 import CompanySettings from "./CompanySettings";
 import BillingDetails from './Billing'
 import PasswordChange from "./PasswordChange";
+import LeaveSettings from "./LeaveSettings";
 // Subcomponents for each tab
 const TrackSettings = () => <div>Track Settings Component</div>;
 
@@ -16,6 +17,8 @@ function Settings() {
     { name: "Password", component: <PasswordChange /> },
     { name: "Company Settings", component: <CompanySettings /> },
     { name: "Billing Details", component: <BillingDetails /> },
+    { name: "Leave settings", component: <LeaveSettings /> },
+
   ];
 
   return (
@@ -27,7 +30,7 @@ function Settings() {
       <button
         key={tab.name}
         onClick={() => setActiveTab(tab.name)}
-        className={`pl-4 md:pl-8  font-medium relative ${
+        className={`pl-2 md:pl-8  font-medium relative ${
           activeTab === tab.name
             ? "text-liteGreen"
             : "text-gray-600"

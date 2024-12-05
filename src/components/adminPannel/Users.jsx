@@ -1,161 +1,134 @@
 import React, { useState } from "react";
-import { FaChevronLeft, FaChevronRight, FaEdit, FaTrash } from "react-icons/fa"; // Added more icons for actions
-import AddMember from "../../modals/AddMember";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+import { RiSearch2Line } from "react-icons/ri";
+import EmployeeCards from "./EmployeeCards";
+const Users = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedDropdownOption, setSelectedDropdownOption] = useState("");
 
-function Users() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleDropdownSelect = (value) => {
+    setSelectedDropdownOption(value);
+    setIsDropdownOpen(false);
+    // You can perform additional actions with the selected value here
   };
 
-  const handleAddMember = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // Dummy data for users
-  const usersData = [
+  const employees = [
     {
       id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      role: "Admin",
-      department: "IT",
-      status: "Active",
+      name: "Ameera Jo",
+      role: "Full stack developer",
+      idNumber: "33441",
+      location: "New York",
+      image: "https://via.placeholder.com/100",
     },
-    
+    {
+      id: 2,
+      name: "John Smith",
+      role: "UI/UX Designer",
+      idNumber: "22331",
+      location: "California",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 3,
+      name: "Mary Jane",
+      role: "Backend Developer",
+      idNumber: "55422",
+      location: "Texas",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 4,
+      name: "Michael Lee",
+      role: "QA Engineer",
+      idNumber: "77441",
+      location: "Florida",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 5,
+      name: "Michael Lee",
+      role: "QA Engineer",
+      idNumber: "77441",
+      location: "Florida",
+      image: "https://via.placeholder.com/100",
+    },   {
+      id: 6,
+      name: "Michael Lee",
+      role: "QA Engineer",
+      idNumber: "77441",
+      location: "Florida",
+      image: "https://via.placeholder.com/100",
+    },
+    // Add more employees as needed
   ];
-
-  const filteredUsers = usersData.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const dropdownOptions = ["Developer", "Staff"];
 
   return (
-    <div className="lg:px-24 md:px-10 px-4 pb-5">
-      <h1 className=" pl-3 sm:pl-0 text-xl md:text-2xl xl:text-3xl font-bold mb-5 mt-8 sm:mt-12 md:mt-14 lg:mt-16">
-        Users List
-      </h1>
-
-      {/* Search Input */}
-      <div className="mb-4 flex flex-row justify-between ">
-      <input
+    <div className="p-6">
+      {/* Search Filters */}
+      <div className="flex flex-wrap items-center gap-4 mb-6">
+        <input
           type="text"
-          placeholder="Search by name..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="bg-gray-100 h-10  text-gray-800 p-2 rounded-lg w-1/3 focus:outline-none focus:bg-gray-200 transition duration-300"
+          placeholder="Employee ID"
+          className="border h-[39px] border-gray-300 rounded-lg p-2 pt-1 w-[100px] md:w-[120px] lg:w-[200px] focus:outline-none placeholder:font-customBold placeholder:text-[#BDBDBD]"
         />
-        <div className="justify-center items-center flex flex-col gap-y-4">
-          <button
-            type="button"
-            className="px-4 py-2 text-sm sm:text-base text-white rounded-lg bg-[#022213] hover:bg-[#72A10F] transition duration-300"
+        <input
+          type="text"
+          placeholder="Employee Name"
+          className="border h-[39px] border-gray-300 rounded-lg p-2 pt-1 w-[100px] md:w-[120px] lg:w-[200px]  focus:outline-none placeholder:font-customBold placeholder:text-[#BDBDBD]"
+        />
+
+        <div className="relative w-[110px] md:w-[130px] lg:w-[150px] xl:w-[217px] h-[40px] pt-0.5">
+          {/* Dropdown */}
+          <div
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="border border-gray-300 rounded-md px-4 py-2 flex justify-between items-center cursor-pointer text-sm"
           >
-            Add Member
-          </button>
+            <span className="text-[#BDBDBD] font-customBold ">
+              {selectedDropdownOption || " Designation"}
+            </span>
+            {isDropdownOpen ? <IoIosArrowUp size={16} className="text-gray-500" /> : <IoIosArrowDown size={16} className="text-gray-500" />}
+          </div>
+
+          {/* Dropdown Options */}
+          {isDropdownOpen && (
+            <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10">
+              {dropdownOptions.map((option, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleDropdownSelect(option)}
+                  className="px-4 py-2 font-customBold3  hover:bg-liteGreen cursor-pointer text-sm text-gray-800 hover:text-white"
+                >
+                  {option}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      </div>
-
-      {/* Table */}
-      <div className="relative overflow-x-auto shadow-md rounded-lg border border-gray-200">
-        <table className="w-full text-sm text-left text-gray-300">
-          <thead className="text-xs text-zinc-600 font-extralight ">
-            <tr className="h-14">
-              <th scope="col" className="px-6 py-3">
-                #
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Email
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Role
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Department
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Status
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="text-gray-900 font-medium">
-            {filteredUsers.map((user, index) => (
-              <tr key={user.id} className="bg-zinc-50 mt-2 border">
-                <th scope="row" className="px-6 py-4 font-medium text-white">
-                  {index + 1}
-                </th>
-                <td className="px-6 py-4">{user.name}</td>
-                <td className="px-6 py-4">{user.email}</td>
-                <td className="px-6 py-4">{user.role}</td>
-                <td className="px-6 py-4">{user.department}</td>
-                <td className="px-6 py-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      user.status === "Active"
-                        ? "bg-green-200 text-green-800"
-                        : "bg-red-200 text-red-800"
-                    }`}
-                  >
-                    {user.status}
-                  </span>
-                </td>
-                <td className="px-6 py-4 flex space-x-4">
-                  <button className="text-blue-600 hover:text-blue-900">
-                    <FaEdit />
-                  </button>
-                  <button className="text-red-600 hover:text-red-900">
-                    <FaTrash />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Pagination */}
-      <div className="flex justify-between items-center mt-4">
-        <button className="text-white bg-custom-blue hover:bg-table-color py-2 px-4 rounded-lg">
-          <FaChevronLeft />
+        <div className=" w-[70px] sm:w-[80px] lg:w-[132px]">
+        <button className=" px-2 w-full  lg:mr-1 h-[38px] text-smallHead xl:text-sm bg-customGreen text-white rounded-lg hover:bg-liteGreen transition-all">
+          Search
         </button>
-        <span className="text-white">Page 1 of 2</span>
-        <button className="text-white bg-custom-blue hover:bg-table-color py-2 px-4 rounded-lg">
-          <FaChevronRight />
-        </button>
-      </div>
+        </div>
+    
+        
+       
+        {/* <span className="flex justify-center shadow-sm text-white bg-liteGreen items-center h-[39px] px-1 rounded-lg  border  border-gray-200"> 
+        <RiSearch2Line size={20}/>
 
-      {/* Modal */}
-      {isModalOpen && (
-        <AddMember
-          closeModal={closeModal}
-          setShowPassword={setShowPassword}
-          showPassword={showPassword}
-          setShowConfirmPassword={setShowConfirmPassword}
-          showConfirmPassword={showConfirmPassword}
-        />
-      )}
+        </span> */}
+      </div>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 xlx:gap-12 pt-4">
+        {employees.map((employee) => (
+          <EmployeeCards key={employee.id} employee={employee} />
+        ))}
+      </div>
+      {/* Employee Cards */}
+
     </div>
   );
-}
+};
 
 export default Users;
-

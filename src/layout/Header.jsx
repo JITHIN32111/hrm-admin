@@ -12,11 +12,10 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosClose } from "react-icons/io";
 import img from '../assets/adminImg.png'
 import logoutImg from '../assets/logout.png'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate ,useLocation } from 'react-router-dom'
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import logoutImg2 from '../assets/logout2.png'
 import profileImg from '../assets/profileImg.png'
-
 const Header = ({ open, setOpen }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [calendarVisibleInDropdown, setCalendarVisibleInDropdown] = useState(false);
@@ -31,7 +30,7 @@ const Header = ({ open, setOpen }) => {
   const calendarDropdownRef = useRef(null); // Separate ref for calendar dropdown
   const hrTeamDropdownRef = useRef(null); // Separate ref for HR Team dropdown
   const navigate = useNavigate()
-
+ const location =useLocation()
   //hanlde logout button
   const handleLogoutButton = () => {
     console.log("::::::::::::::::::::::::::::");
@@ -174,6 +173,7 @@ const Header = ({ open, setOpen }) => {
           <ImMenu size={24} />
         </button>
         <div className="flex flex-row gap-x-4">
+          
           <button
             type="button"
             className="text-xs hidden lg:flex gap-x-1 justify-center items-center h-[36px] w-[115px]  text-white rounded-lg bg-[#022213] hover:bg-[#72A10F] transition duration-300"

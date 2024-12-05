@@ -20,6 +20,7 @@ export default {
 
       },
       colors: {
+        
         customGreen: '#022213', // Custom green color
         liteGreen: '#72A10F',   // Lite green color
         customGray:'#999999',
