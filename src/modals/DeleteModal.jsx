@@ -3,7 +3,12 @@ import deleteImg from '../assets/Delete.png'
 import { IoIosClose } from "react-icons/io";
 
 function DeleteModal({closeDeleteModal,model}) {
-  const title =model==='department'?'Department':'Designation'
+  const title = model === 'department'
+  ? 'Department'
+  : model === 'designation'
+  ? 'Designation'
+  : 'Employee Account';
+
   return (
     <div>
      

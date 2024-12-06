@@ -1,8 +1,9 @@
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom'
 function AdminLogin() {
+  const navigate=useNavigate()
   return (
-    <div>
+    <div onClick={()=>navigate('/details')}>
       Login
     </div>
   )

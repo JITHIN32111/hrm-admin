@@ -5,9 +5,11 @@ import EmployeeId from '../../assets/tag-user.png';
 import user from '../../assets/Ellipse 453.png';
 import more from '../../assets/more-circle.png';
 import useClickOutside from '../../customHooks/useClickOutside'; // Import the custom hook
-
+import DeleteModal from "../../modals/DeleteModal";
 const EmployeeCards = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+
   const menuRef = useRef(null);
 
   // Use custom hook to detect outside clicks
@@ -17,6 +19,14 @@ const EmployeeCards = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleDelete=()=>{
+    setDeleteModal(true)
+  }
+  console.log(deleteModal);
+  
+const closeModal=()=>{
+  setDeleteModal(false)
+}
   return (
     <div className="bg-white shadow-lg rounded-lg p-4 pt-6 w-full xlx:w-full relative">
       {/* Action Menu */}
@@ -38,7 +48,7 @@ const EmployeeCards = () => {
                 Edit
               </div>
               <div
-                onClick={() => alert("Delete action")}
+                onClick={() => handleDelete()}
                 className="flex items-center px-4 py-2 text-smallHead xlx:text-sm text-red-600 hover:bg-gray-100 cursor-pointer"
               >
                 <MdDelete className="mr-2" />
@@ -88,6 +98,7 @@ const EmployeeCards = () => {
           View profile
         </button>
       </div>
+      {deleteModal && <DeleteModal model={'user'} closeDeleteModal={closeModal}/>}
     </div>
   );
 };
